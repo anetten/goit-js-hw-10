@@ -4,9 +4,6 @@ import Notiflix from 'notiflix';
 import { fetchCatByBreed } from './cat-api.js';
 import { fetchBreeds } from './cat-api.js';
 
-axios.defaults.headers.common['x-api-key'] =
-  'live_Xf6ifD60kI1Ix8AE25VmVrHQKN6wClRlrefL7AaQaQMXLBG2r4MCA1hB7x2lEe5v';
-
 const breedSelect = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
