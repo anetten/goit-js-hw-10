@@ -6,7 +6,7 @@ export function fetchBreeds() {
   const options = {
     headers: {
       'x-api-key':
-        'live_LVElnDG0qei7b46LgHfaN0g6p0Q8ltRmuwgyRcjBR890c1CX9OU8WlLveL28bWwO',
+        'live_Xf6ifD60kI1Ix8AE25VmVrHQKN6wClRlrefL7AaQaQMXLBG2r4MCA1hB7x2lEe5v',
     },
   };
   return fetch(url, options).then(response => {
@@ -25,7 +25,7 @@ export function fetchCatByBreed(breedId) {
   const options = {
     headers: {
       'x-api-key':
-        'live_LVElnDG0qei7b46LgHfaN0g6p0Q8ltRmuwgyRcjBR890c1CX9OU8WlLveL28bWwO',
+        'live_Xf6ifD60kI1Ix8AE25VmVrHQKN6wClRlrefL7AaQaQMXLBG2r4MCA1hB7x2lEe5v',
     },
   };
   return fetch(url, options).then(response => {
