@@ -1,8 +1,9 @@
 export function fetchBreeds() {
   const BASE_URL = 'https://api.thecatapi.com/v1';
   const END_POINT = '/breeds';
-  const PARAMS = `breeds`;
-  const url = BASE_URL + END_POINT + PARAMS;
+  // const PARAMS = `breeds`;
+  const url = BASE_URL + END_POINT;
+  // + PARAMS;
   const options = {
     headers: {
       'x-api-key':
