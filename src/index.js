@@ -12,20 +12,13 @@ const catInfo = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
 const errorElement = document.querySelector('.error');
 
-fetch('https://api.thecatapi.com/v1/breeds')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-    return response.json();
-  })
+const slim = new SlimSelect(breedSelect);
+
+fetchBreeds()
   .then(breeds => {
     hideLoader();
     breeds.forEach(breed => {
-      const option = document.createElement('option');
-      option.value = breed.id;
-      option.textContent = breed.name;
-      breedSelect.appendChild(option);
+      slim.add({ text: breed.name, value: breed.id });
     });
   })
   .catch(error => {
@@ -54,13 +47,8 @@ const showError = message => {
 
 showLoader();
 
-breedSelect = new SlimSelect({
-  select: '#breedSelect',
-  placeholder: 'Select a breed',
-});
-
-breedSelect.slim.addEventListener('change', () => {
-  const selectedBreedId = breedSelect.selected();
+breedSelect.addEventListener('change', () => {
+  const selectedBreedId = slim.selected();
   if (selectedBreedId) {
     showLoader();
     fetchCatByBreed(selectedBreedId)
@@ -71,16 +59,16 @@ breedSelect.slim.addEventListener('change', () => {
 
         catInfo.innerHTML = `
           <div class="cat-info-container">
-          <div class="cat-photo-container">
-          <img class="cat-photo" src="${cat.url}" alt="cat">
+            <div class="cat-photo-container">
+              <img class="cat-photo" src="${cat.url}" alt="cat">
+            </div>
+            <div class="cat-details">
+              <h2>${cat.breeds[0].name}</h2>
+              <p>Description: ${cat.breeds[0].description}</p>
+              <p>Temperament: ${cat.breeds[0].temperament}</p>
+            </div>
           </div>
-          <div class="cat-details">
-          <h2>${cat.breeds[0].name}</h2>
-          <p>Description: ${cat.breeds[0].description}</p>
-          <p>Temperament: ${cat.breeds[0].temperament}</p>
-          </div>
-          </div>
-          `;
+        `;
       })
       .catch(error => {
         hideLoader();

@@ -1,0 +1,38 @@
+.loader {
+  display: none;
+}
+
+.error {
+  display: none;
+  color: red;
+}
+
+.breed-select {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.cat-info-container {
+  width: 55%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cat-photo-container {
+  display: flex;
+  text-align: left;
+}
+
+.cat-photo {
+  width: 100%;
+  margin-right: 20px;
+}
+
+.cat-details {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
