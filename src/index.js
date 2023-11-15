@@ -12,14 +12,13 @@ const catInfo = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
 const errorElement = document.querySelector('.error');
 
-const slim = new SlimSelect(breedSelect);
-
 fetchBreeds()
   .then(breeds => {
     hideLoader();
     const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
     const slim = new SlimSelect({ select: breedSelect });
-    slim.setData(data);
+    // slim.setData(data);
+    slim.setData([{ text: '', value: '' }, ...data]);
   })
   .catch(error => {
     hideLoader();
