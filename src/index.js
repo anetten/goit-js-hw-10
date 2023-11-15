@@ -16,9 +16,11 @@ const slim = new SlimSelect(breedSelect);
 fetchBreeds()
   .then(breeds => {
     hideLoader();
-    breeds.forEach(breed => {
-      slim.add({ text: breed.name, value: breed.id });
-    });
+    const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
+    slim.setData(data);
+    // breeds.forEach(breed => {
+    //   slim.add({ text: breed.name, value: breed.id });
+    // });
   })
   .catch(error => {
     hideLoader();
