@@ -17,7 +17,7 @@ fetchBreeds()
   .then(breeds => {
     hideLoader();
     const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
-    slim.setData(data);
+    slim.add(data);
     // breeds.forEach(breed => {
     //   slim.add({ text: breed.name, value: breed.id });
     // });
