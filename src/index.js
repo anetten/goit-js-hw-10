@@ -45,33 +45,30 @@ const showError = message => {
   errorElement.style.display = 'block';
 };
 
-breedSelect.addEventListener('change', selectedBreedIdValue => {
-  // // const selectedBreedId = slim.selected();
-  // const selectedBreedId = slim.selected();
-  // const selectedBreedIdValue = selectedBreedId ? selectedBreedId.value : null;
+breedSelect.addEventListener('change', event => {
+  const selectedBreedId = event.target.value;
   showLoader();
-  fetchCatByBreed(selectedBreedIdValue)
+  fetchCatByBreed(selectedBreedId)
     .then(response => {
       hideLoader();
       errorElement.style.display = 'none';
       const cat = response[0];
 
       catInfo.innerHTML = `
-          <div class="cat-info-container">
-            <div class="cat-photo-container">
-              <img class="cat-photo" src="${cat.url}" alt="cat">
-            </div>
-            <div class="cat-details">
-              <h2>${cat.breeds[0].name}</h2>
-              <p>Description: ${cat.breeds[0].description}</p>
-              <p>Temperament: ${cat.breeds[0].temperament}</p>
-            </div>
+        <div class="cat-info-container">
+          <div class="cat-photo-container">
+            <img class="cat-photo" src="${cat.url}" alt="cat">
           </div>
-        `;
+          <div class="cat-details">
+            <h2>${cat.breeds[0].name}</h2>
+            <p>Description: ${cat.breeds[0].description}</p>
+            <p>Temperament: ${cat.breeds[0].temperament}</p>
+          </div>
+        </div>
+      `;
     })
     .catch(error => {
       hideLoader();
       showError('Error: ' + error.message);
     });
 });
-console.log(selectedBreedIdValue);
