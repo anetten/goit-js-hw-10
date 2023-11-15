@@ -47,10 +47,13 @@ const showError = message => {
 showLoader();
 
 breedSelect.addEventListener('change', () => {
+  // const selectedBreedId = slim.selected();
   const selectedBreedId = slim.selected();
+  const selectedBreedIdValue = selectedBreedId ? selectedBreedId.value : null;
+
   if (selectedBreedId) {
     showLoader();
-    fetchCatByBreed(selectedBreedId)
+    fetchCatByBreed(selectedBreedIdValue)
       .then(response => {
         hideLoader();
         errorElement.style.display = 'none';
