@@ -2,6 +2,7 @@ import axios from 'axios';
 axios.defaults.headers.common['x-api-key'] =
   'live_Xf6ifD60kI1Ix8AE25VmVrHQKN6wClRlrefL7AaQaQMXLBG2r4MCA1hB7x2lEe5v';
 import SlimSelect from 'slim-select';
+import '..node_modules/slim-select/dist/slimselect.css';
 import Notiflix from 'notiflix';
 import { fetchCatByBreed } from './cat-api.js';
 import { fetchBreeds } from './cat-api.js';
@@ -17,10 +18,8 @@ fetchBreeds()
   .then(breeds => {
     hideLoader();
     const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
+    const slim = new SlimSelect({ select: breedSelect });
     slim.setData(data);
-    // breeds.forEach(breed => {
-    //   slim.add({ text: breed.name, value: breed.id });
-    // });
   })
   .catch(error => {
     hideLoader();
@@ -46,20 +45,18 @@ const showError = message => {
   errorElement.style.display = 'block';
 };
 
-breedSelect.addEventListener('change', () => {
+breedSelect.addEventListener('change', selectedBreedIdValue => {
+  // // const selectedBreedId = slim.selected();
   // const selectedBreedId = slim.selected();
-  const selectedBreedId = slim.selected();
-  const selectedBreedIdValue = selectedBreedId ? selectedBreedId.value : null;
+  // const selectedBreedIdValue = selectedBreedId ? selectedBreedId.value : null;
+  showLoader();
+  fetchCatByBreed(selectedBreedIdValue)
+    .then(response => {
+      hideLoader();
+      errorElement.style.display = 'none';
+      const cat = response[0];
 
-  if (selectedBreedId) {
-    showLoader();
-    fetchCatByBreed(selectedBreedIdValue)
-      .then(response => {
-        hideLoader();
-        errorElement.style.display = 'none';
-        const cat = response[0];
-
-        catInfo.innerHTML = `
+      catInfo.innerHTML = `
           <div class="cat-info-container">
             <div class="cat-photo-container">
               <img class="cat-photo" src="${cat.url}" alt="cat">
@@ -71,10 +68,9 @@ breedSelect.addEventListener('change', () => {
             </div>
           </div>
         `;
-      })
-      .catch(error => {
-        hideLoader();
-        showError('Error: ' + error.message);
-      });
-  }
+    })
+    .catch(error => {
+      hideLoader();
+      showError('Error: ' + error.message);
+    });
 });
