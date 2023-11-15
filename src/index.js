@@ -12,21 +12,6 @@ const loader = document.querySelector('.loader');
 const errorElement = document.querySelector('.error');
 
 const slim = new SlimSelect(breedSelect);
-showLoader();
-
-fetchBreeds()
-  .then(breeds => {
-    hideLoader();
-    const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
-    slim.setData(data);
-    // breeds.forEach(breed => {
-    //   slim.add({ text: breed.name, value: breed.id });
-    // });
-  })
-  .catch(error => {
-    hideLoader();
-    Notiflix.Notify.warning('Error fetching cat breeds' + error.message);
-  });
 
 const showLoader = () => {
   loader.style.display = 'block';
@@ -46,6 +31,20 @@ const showError = message => {
   errorElement.textContent = message;
   errorElement.style.display = 'block';
 };
+
+fetchBreeds()
+  .then(breeds => {
+    hideLoader();
+    const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
+    slim.setData(data);
+    // breeds.forEach(breed => {
+    //   slim.add({ text: breed.name, value: breed.id });
+    // });
+  })
+  .catch(error => {
+    hideLoader();
+    Notiflix.Notify.warning('Error fetching cat breeds' + error.message);
+  });
 
 breedSelect.addEventListener('change', () => {
   // const selectedBreedId = slim.selected();
