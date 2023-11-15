@@ -12,12 +12,13 @@ const loader = document.querySelector('.loader');
 const errorElement = document.querySelector('.error');
 
 const slim = new SlimSelect(breedSelect);
+showLoader();
 
 fetchBreeds()
   .then(breeds => {
     hideLoader();
     const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
-    slim.add(data);
+    slim.setData(data);
     // breeds.forEach(breed => {
     //   slim.add({ text: breed.name, value: breed.id });
     // });
@@ -45,8 +46,6 @@ const showError = message => {
   errorElement.textContent = message;
   errorElement.style.display = 'block';
 };
-
-showLoader();
 
 breedSelect.addEventListener('change', () => {
   // const selectedBreedId = slim.selected();
