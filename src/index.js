@@ -2,7 +2,7 @@ import axios from 'axios';
 axios.defaults.headers.common['x-api-key'] =
   'live_Xf6ifD60kI1Ix8AE25VmVrHQKN6wClRlrefL7AaQaQMXLBG2r4MCA1hB7x2lEe5v';
 import SlimSelect from 'slim-select';
-import '..node_modules/slim-select/dist/slimselect.css';
+import '../node_modules/slim-select/dist/slimselect.css';
 import Notiflix from 'notiflix';
 import { fetchCatByBreed } from './cat-api.js';
 import { fetchBreeds } from './cat-api.js';
@@ -74,3 +74,4 @@ breedSelect.addEventListener('change', selectedBreedIdValue => {
       showError('Error: ' + error.message);
     });
 });
+console.log(selectedBreedIdValue);
