@@ -15,15 +15,18 @@ const errorElement = document.querySelector('.error');
 fetchBreeds()
   .then(breeds => {
     hideLoader();
-    const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
-    const slim = new SlimSelect({
+    const data = breeds
+      .map(breed => `<option value =${breed.id}>${breed.name}</option>`)
+      .join();
+    breedSelect.insertAdjacentHTML('beforeend', data);
+
+    new SlimSelect({
       select: breedSelect,
       settings: {
         searchPlaceholder: 'Search',
         placeholderText: 'Choose a breed',
       },
     });
-    slim.setData(data);
   })
   .catch(error => {
     hideLoader();
