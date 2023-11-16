@@ -17,8 +17,7 @@ fetchBreeds()
     hideLoader();
     const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
     const slim = new SlimSelect({ select: breedSelect });
-    // slim.setData(data);
-    slim.setData([{ text: '', value: '' }, ...data]);
+    slim.setData(data);
   })
   .catch(error => {
     hideLoader();
@@ -27,14 +26,12 @@ fetchBreeds()
 
 const showLoader = () => {
   loader.style.display = 'block';
-  breedSelect.style.display = 'none';
   catInfo.style.display = 'none';
   errorElement.style.display = 'none';
 };
 
 const hideLoader = () => {
   loader.style.display = 'none';
-  breedSelect.style.display = 'block';
   catInfo.style.display = 'block';
   errorElement.style.display = 'none';
 };
