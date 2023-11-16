@@ -16,7 +16,13 @@ fetchBreeds()
   .then(breeds => {
     hideLoader();
     const data = breeds.map(breed => ({ text: breed.name, value: breed.id }));
-    const slim = new SlimSelect({ select: breedSelect });
+    const slim = new SlimSelect({
+      select: '#breedSelect',
+      settings: {
+        searchPlaceholder: 'Search',
+        placeholderText: 'Choose a breed',
+      },
+    });
     slim.setData(data);
   })
   .catch(error => {
